@@ -69,6 +69,11 @@ A `Boolean`. For Mac App Store build, this property is `true`, for other builds 
 A `Boolean` that controls ASAR support inside your application. Setting this to `true`
 will disable the support for `asar` archives in Node's built-in modules.
 
+### `process.noDefaultMenu`
+
+A `Boolean` that controls whether the default menu is created when no menu is created
+by the app.
+
 ### `process.noDeprecation`
 
 A `Boolean` that controls whether or not deprecation warnings are printed to `stderr`.
@@ -78,7 +83,7 @@ instead of the `--no-deprecation` command line flag.
 ### `process.enablePromiseAPIs`
 
 A `Boolean` that controls whether or not deprecation warnings are printed to `stderr` when
-formerly callback-based APIs converted to Promises are invoked using callbacks. Setting this to `true` 
+formerly callback-based APIs converted to Promises are invoked using callbacks. Setting this to `true`
 will enable deprecation warnings.
 
 ### `process.resourcesPath`
@@ -168,7 +173,7 @@ Returns an object with V8 heap statistics. Note that all statistics are reported
 
 Returns `Object`:
 
-* `residentSet` Integer _Linux_ and _Windows_ - The amount of memory 
+* `residentSet` Integer _Linux_ and _Windows_ - The amount of memory
 currently pinned to actual physical RAM in Kilobytes.
 * `private` Integer - The amount of memory not shared by other processes, such as
   JS heap or HTML content in Kilobytes.
@@ -179,7 +184,7 @@ Returns an object giving memory usage statistics about the current process. Note
 that all statistics are reported in Kilobytes.
 This api should be called after app ready.
 
-Chromium does not provide `residentSet` value for macOS. This is because macOS 
+Chromium does not provide `residentSet` value for macOS. This is because macOS
 performs in-memory compression of pages that haven't been recently used. As a
 result the resident set size value is not what one would expect. `private` memory
 is more representative of the actual pre-compression memory usage of the process
