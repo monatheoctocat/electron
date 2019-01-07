@@ -425,6 +425,52 @@ describe('app module', () => {
       w.loadURL('about:blank')
       w.webContents.executeJavaScript(`require('electron').remote.getGlobal('test')`)
     })
+
+    it('should emit remote-get-builtin event when remote.getBuiltin() is invoked', (done) => {
+      app.once('remote-get-builtin', (event, webContents, moduleName) => {
+        expect(webContents).to.equal(w.webContents)
+        expect(moduleName).to.equal('app')
+        done()
+      })
+      w = new BrowserWindow({
+        show: false,
+        webPreferences: {
+          nodeIntegration: true
+        }
+      })
+      w.loadURL('about:blank')
+      w.webContents.executeJavaScript(`require('electron').remote.app`)
+    })
+
+    it('should emit remote-get-current-window event when remote.getCurrentWindow() is invoked', (done) => {
+      app.once('remote-get-current-window', (event, webContents) => {
+        expect(webContents).to.equal(w.webContents)
+        done()
+      })
+      w = new BrowserWindow({
+        show: false,
+        webPreferences: {
+          nodeIntegration: true
+        }
+      })
+      w.loadURL('about:blank')
+      w.webContents.executeJavaScript(`require('electron').remote.getCurrentWindow()`)
+    })
+
+    it('should emit remote-get-current-web-contents event when remote.getCurrentWebContents() is invoked', (done) => {
+      app.once('remote-get-current-web-contents', (event, webContents) => {
+        expect(webContents).to.equal(w.webContents)
+        done()
+      })
+      w = new BrowserWindow({
+        show: false,
+        webPreferences: {
+          nodeIntegration: true
+        }
+      })
+      w.loadURL('about:blank')
+      w.webContents.executeJavaScript(`require('electron').remote.getCurrentWebContents()`)
+    })
   })
 
   describe('app.setBadgeCount', () => {
